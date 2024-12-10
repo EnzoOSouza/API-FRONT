@@ -1,4 +1,38 @@
-.card {
-    margin-bottom: 20px;
-  }
-  
+.card img {
+  width: 100%; /* Largura total do cartão */
+  height: 200px; /* Altura fixa */
+  object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorção */
+  border-bottom: 1px solid #ddd; /* Linha separadora */
+  padding-bottom: 10px; /* Espaço entre a imagem e o conteúdo */
+  margin-bottom: 15px; /* Espaço inferior */
+}
+
+.card h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555; /* Texto secundário */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Efeito de elevação */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+}
+
+#search {
+  margin-bottom: 15px;
+}
+
+#product-count {
+  font-weight: bold;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

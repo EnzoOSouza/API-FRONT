@@ -4,6 +4,10 @@ const productCount = document.getElementById("product-count");
 const searchInput = document.getElementById("search");
 const sortOptions = document.getElementById("sortOptions");
 
+// Variáveis globais para armazenar o estado atual de ordenação e filtro
+let currentOrder = "nome";
+let currentFilter = "";
+
 // Função para carregar os produtos com base na pesquisa e ordenação
 async function loadProducts(order = "nome", filter = "") {
   try {
@@ -32,7 +36,7 @@ async function loadProducts(order = "nome", filter = "") {
       htmlContent += `
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
           <div class="card">
-            <img src="${product.url || 'https://via.placeholder.com/150'}" class="card-img-top" alt="${product.url || 'Imagem do produto'}">
+            <img src="${product.url}" class="card-img-top" alt="${product.nome || 'Imagem do produto'}">
             <div class="card-body">
               <h5 class="card-title">${product.nome || 'Produto sem nome'}</h5>
               <p class="card-text">Preço: R$ ${product.preco || '0,00'}</p>
@@ -53,16 +57,17 @@ async function loadProducts(order = "nome", filter = "") {
 
 // Carregando os produtos ao iniciar a página
 window.onload = function() {
-  loadProducts();  // Carregar os produtos sem filtro inicial
+  loadProducts(); // Carregar os produtos sem filtro inicial
 };
-
 
 // Adicionando um evento de escuta para o campo de pesquisa
 searchInput.addEventListener("input", function() {
-  const filterValue = searchInput.value.trim();
-  loadProducts("nome", filterValue);  // Recarrega os produtos com o filtro atualizado
+  currentFilter = searchInput.value.trim(); // Atualiza o valor do filtro
+  loadProducts(currentOrder, currentFilter); // Recarrega os produtos com ordenação e filtro atualizados
 });
+
+// Adicionando um evento de escuta para as opções de ordenação
 sortOptions.addEventListener("change", (event) => {
-  const selectedOrder = event.target.value;
-  loadProducts(selectedOrder); // Carregar produtos com a ordenação selecionada
+  currentOrder = event.target.value; // Atualiza o valor da ordenação
+  loadProducts(currentOrder, currentFilter); // Recarrega os produtos com ordenação e filtro atualizados
 });
